@@ -1,0 +1,48 @@
+body {
+  background-color: white;
+  color: black;
+}
+#links {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#links a {
+  text-decoration: none;
+}
+.link-homepage {
+  padding: 30px;
+}
+h1 {
+  text-align: center;
+}
+p {
+  padding: 10px;
+}
+#landing-text {
+  padding: 20px;
+}
+.club-entries {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.entry {
+  border: 2px solid black;
+}
+header {
+  text-align: center;
+  font-size: 40px;
+  padding: 30px;
+}
+/* footer help for fixed position was found here: https://www.w3schools.com/howto/howto_css_fixed_footer.asp */
+footer {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}

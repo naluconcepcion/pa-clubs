@@ -1,5 +1,6 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import './Style.css';
 
 class Database extends React.Component {
   constructor(props) {
@@ -37,20 +38,20 @@ class Database extends React.Component {
     } else {
       return (
       <div className="render-events">
+      <p><Link to="/"> Back to the homepage </Link></p>
         <h1> Clubs </h1>
-        <p>
+        <div className="club-entries">
         {items.map(
           items =>
-          <div className="club-entries">
-            <h2 className = "id">  {items.id} </h2>
+          <div className="entry">
             <h2 className = "name"> {items.club_name} </h2>
-            <p className = "student-leader"> {items.student_leader} </p>
-            <p className = "meeting-time"> {items.time} </p>
-            <p className = "location"> {items.location} </p>
-            <p className = "advisor"> {items.advisor} </p>
-            <p className = "description"> {items.description} </p>
+            <p className = "student-leader"> <b>Club Leader(s)</b>: {items.student_leader} </p>
+            <p className = "meeting-time"> <b>Meeting Time</b>: {items.time} </p>
+            <p className = "location"> <b>Meeting Location</b>: {items.location} </p>
+            <p className = "advisor"> <b>Club Advisor</b>: {items.advisor} </p>
+            <p className = "description"> <b>Club Description</b>: {items.description} </p>
           </div>)}
-          </p>
+        </div>
       </div>
       );
     }

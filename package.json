@@ -1,0 +1,20 @@
+{
+  "name": "pa-clubs",
+  "version": "1.0.0",
+  "description": "a friendly utility to help students find clubs at pa",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naluconcepcion/pa-clubs.git"
+  },
+  "author": "Nalu Concepcion and Liv Martens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naluconcepcion/pa-clubs/issues"
+  },
+  "homepage": "https://github.com/naluconcepcion/pa-clubs#readme"
+}

@@ -9,17 +9,6 @@ var NotFound = require('./NotFound.jsx').default;
 var Login = require('./Login.jsx').default;
 var Database = require('./Database.jsx').default;
 
-/* storage for old code that i haven't written backend to yet -- Nalu
-
-<Route exact={true} path='/users/:username' render={(props) => (
-  <User username={props}/>
-)} />
-
-<Route exact={true} path='/' render={() => (
-    <Info/>
-)}/>
-*/
-
 function Routes(props) {
   return(
     <BrowserRouter>

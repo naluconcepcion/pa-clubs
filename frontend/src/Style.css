@@ -30,6 +30,7 @@ p {
 }
 .entry {
   border: 2px solid black;
+  margin: 10px;
 }
 header {
   text-align: center;

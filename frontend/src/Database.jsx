@@ -11,7 +11,7 @@ class Database extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("https://localhost:8888/database").then(
+    fetch("http://localhost:8888/database").then(
       (result) => {
         console.log("state set successfully!")
         console.log(result)
@@ -32,16 +32,16 @@ class Database extends React.Component {
     )
   }
   render() {
-    const { err, isLaded, items } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
+    const { err, isLoaded, items } = this.state;
+    if (err) {
+      return <div>Error: {err.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
       <div className="render-events">
-        <h1> Calendar Events </h1>
-        <p> items: {items[0]} </p>
+        <h1> Clubs </h1>
+        <p> items: {JSON.stringify(items)} </p>
       </div>
       );
     }

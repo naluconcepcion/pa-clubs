@@ -27,7 +27,7 @@ function Info(){
     <Link to="/login"> Login </Link>
     </div>
     <div class="login grey">
-    <Link to="/database"> Database </Link>
+    <Link to="/database"> Clubs List </Link>
     </div>
     </div>
     <div id ="information">

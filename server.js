@@ -47,8 +47,9 @@ knex.schema.hasTable("clubs").then(function(exists) {
 });
 // create clubs entry in table (this should require authentication of some sort)
 app.post("/", function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
   knex("clubs").insert({
-    club_name: req.body['username'],
+    club_name: req.body['club_name'],
     student_leader: req.body['password'],
     time: req.body['time'],
     location: req.body['location'],
@@ -59,8 +60,10 @@ app.post("/", function(req, res) {
     res.status(200).send("successfully created entry in clubs table!");
   })
 });
+
 // return a JSON list of all clubs
 app.get("/database", function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
   knex.select().table("clubs").then(function(database) {
     res.json(database)
   })

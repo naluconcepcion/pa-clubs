@@ -15,12 +15,7 @@ class Login extends React.Component {
   }
 
   handleChange(event) {
-    var uname = event.target.value;
-    var pword = event.target.value;
-    this.setState({
-      username: uname,
-      password: pword
-    });
+    this.setState({ [event.target.name]: event.target.value }); // relied on this dude https://medium.com/@tmkelly28/handling-multiple-form-inputs-in-react-c5eb83755d15
     console.log(this.state);
   }
 

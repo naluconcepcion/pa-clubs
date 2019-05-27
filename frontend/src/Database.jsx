@@ -34,7 +34,7 @@ class Database extends React.Component {
     if (err) {
       return <div>Error: {err.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div id="loading">Loading...</div>;
     } else {
       return (
       <div className="render-events">

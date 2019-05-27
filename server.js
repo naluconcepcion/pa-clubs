@@ -8,6 +8,12 @@ const express = require("express");
 const app = express();
 const port = 8888;
 
+// taken from https://medium.com/@alexishevia/using-cors-in-express-cac7e29b005b
+// setting up cors to spare the headaches
+// @LIV we should fix this later or write about it in the security audit
+var cors = require('cors');
+app.use(cors());
+
 // path matching
 const path = require('path')
 
@@ -74,8 +80,6 @@ knex.schema.hasTable("users").then(function(exists) {
 // Nalu
 // create clubs entry in table
 app.post("/", function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
-  res.setHeader('Access-Control-Allow-Origin', 'http://pa-clubs.herokuapp.com'); // allowing for remote testing from frontend to backend pulling
   knex("clubs").insert({
     club_name: req.body['club_name'],
     student_leader: req.body['password'],
@@ -92,8 +96,6 @@ app.post("/", function(req, res) {
 // Liv
 // allow any current student leaders to modify their own entry
 app.post("/update", function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
-  res.setHeader('Access-Control-Allow-Origin', 'http://pa-clubs.herokuapp.com'); // allowing for remote testing from frontend to backend pulling
   /*
   Ok so I was thinking the way we could do this (and feel free to do it differently but just
   an idea) was that we could require everyone who wanted to POST to be redirected to /login or /signup.
@@ -106,8 +108,6 @@ app.post("/update", function(req, res) {
 // Liv
 // create a new entry in the users table; make sure to check for whether or not username already is taken
 app.get("/signup", function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
-  res.setHeader('Access-Control-Allow-Origin', 'http://pa-clubs.herokuapp.com'); // allowing for remote testing from frontend to backend pulling
   knes.select().table("users").then(function(database) {
     // do things here
   })
@@ -116,8 +116,6 @@ app.get("/signup", function(req, res) {
 // Nalu
 // authenticate user, make sure to set the 'superuser' and 'is_leader' parameters appropriately
 app.post("/login", function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
-  res.setHeader('Access-Control-Allow-Origin', 'http://pa-clubs.herokuapp.com'); // allowing for remote testing from frontend to backend pulling
   knex.select("password").from("users").where({
     "username": req.body.username,
     "password": req.body.password
@@ -134,8 +132,6 @@ app.post("/login", function(req, res) {
 // Nalu
 // return a JSON list of all clubs
 app.get("/database", function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
-  res.setHeader('Access-Control-Allow-Origin', 'http://pa-clubs.herokuapp.com'); // allowing for remote testing from frontend to backend pulling
   knex.select().table("clubs").then(function(database) {
     res.json(database)
   })

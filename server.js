@@ -33,7 +33,7 @@ async function connect() {
   await client.connect()
 };
 
-// frontend rendering
+// frontend rendering, taken from https://medium.com/@chloechong.us/how-to-deploy-a-create-react-app-with-an-express-backend-to-heroku-32decfee6d18
 app.use(express.static(path.join(__dirname, 'frontend/build')))
 
 // ------------------------------------- KNEX setup -----------------------------------

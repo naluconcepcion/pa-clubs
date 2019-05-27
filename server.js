@@ -107,13 +107,14 @@ app.get("/signup", function(req, res) {
 // authenticate user, make sure to set the 'superuser' and 'is_leader' parameters appropriately
 app.post("/login", function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
-  knex.select("password").where({
-    "username": req.query['username'],
-    "password": req.query['password']
-  }).from("users").then(function(password) {
+  knex.select("password").from("users").where({
+    "username": req.body.username,
+    "password": req.body.password
+  }).then(function(password) {
     console.log(password.length);
     if (password.length != 0) {
-      res.redirect()
+      // res.redirect()
+      res.status(200).send("working")
     } else {
       res.status(400).send("no user with that username/password combination")
     }

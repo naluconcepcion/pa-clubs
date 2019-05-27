@@ -1,4 +1,4 @@
-// taken from project1-sample-project from backend project and modified
+// boostrapped from project1-sample-project from backend project and modified
 
 // loading in config variable
 const config = require('./config.js');
@@ -29,8 +29,9 @@ const client = new Client();
 async function connect() {
   await client.connect()
 };
-// ------------------------------------- Database KNEX queries -----------------------------------
-// create the table if it doesn't exist
+// ------------------------------------- KNEX setup -----------------------------------
+// Nalu
+// create the clubs table if it doesn't exist
 knex.schema.hasTable("clubs").then(function(exists) {
   if (!exists) {
     return knex.schema.createTable("clubs", function(table) {
@@ -45,7 +46,26 @@ knex.schema.hasTable("clubs").then(function(exists) {
     });
   }
 });
-// create clubs entry in table (this should require authentication of some sort)
+
+// Nalu
+// create the users table if it doesn't exist (where do we hash the password?)
+knex.schema.hasTable("users").then(function(exists) {
+  if(!exists) {
+    return knex.schema.createTable("users", function(table) {
+      console.log("created users table");
+      table.increments("id");
+      table.string("username");
+      table.string("password");
+      table.string("full_name");
+      table.boolean("superuser"); // ideally we could set this by actually accessing andover credentials
+      table.boolean("is_leader"); // true if  'full_name' is in the 'student_leader' column of 'clubs'
+    });
+  }
+});
+
+// ------------------------------------- POST/GET requests -----------------------------------
+// Nalu
+// create clubs entry in table
 app.post("/", function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
   knex("clubs").insert({
@@ -61,6 +81,45 @@ app.post("/", function(req, res) {
   })
 });
 
+// Liv
+// allow any current student leaders to modify their own entry
+app.post("/update", function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
+  /*
+  Ok so I was thinking the way we could do this (and feel free to do it differently but just
+  an idea) was that we could require everyone who wanted to POST to be redirected to /login or /signup.
+  If the user boolean of student_leader and/or superuser are true, then we go ahead and send them to a form page
+  which will take form data and send it back to the database for updating entries. If the booleans aren't true, we
+  send them to a page which renders "sorry, not enough permissions!" or something like that.
+  */
+});
+
+// Liv
+// create a new entry in the users table; make sure to check for whether or not username already is taken
+app.get("/signup", function(req, res)) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
+  knes.select().table("users").then(function(database) {
+    // do things here to authenticate user
+  });
+});
+
+// Nalu
+// authenticate user, make sure to set the 'superuser' and 'is_leader' parameters appropriately
+app.get("/login", function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
+  knex.select("password").where({
+    "username": req.query['username'],
+    "password": req.query['password']
+  }).from("users").then(function(password) {
+    console.log(password.length);
+    if (password.length != 0) {
+      res.status(200).send("user authenticated")
+    } else {
+      res.status(400).send("no user with that username/password combination")
+    }
+  });
+});
+// Nalu
 // return a JSON list of all clubs
 app.get("/database", function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
@@ -68,6 +127,7 @@ app.get("/database", function(req, res) {
     res.json(database)
   })
 });
+
 // begin listening
 app.listen(process.env.PORT || port, function() {
   console.log(`App listening on port ${port}!`)

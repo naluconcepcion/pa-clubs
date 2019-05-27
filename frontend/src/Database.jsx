@@ -39,7 +39,7 @@ class Database extends React.Component {
       return (
       <div className="render-events">
       <p><Link to="/"> Back to the homepage </Link></p>
-        <h1> Clubs </h1>
+        <h1> Currently Existing Andover Clubs </h1>
         <div className="club-entries">
         {items.map(
           items =>

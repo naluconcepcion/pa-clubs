@@ -124,9 +124,10 @@ app.post("/login", function(req, res) {
   }).then(function(password) {
     console.log(password.length);
     if (password.length != 0) {
-      alert("cool, user exists");
+      // res.redirect()
+      res.status(200).send("working")
     } else {
-      alert("no user with that username/password combination");
+      res.status(400).send("no user with that username/password combination")
     }
   });
 });

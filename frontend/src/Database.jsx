@@ -12,7 +12,7 @@ class Database extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:8888/database").
+    fetch("http://pa-clubs.herokuapp.com/database"). // fetch from REMOTE!
     then(result => result.json())
       .then((res) => {
         console.log(res);
@@ -34,7 +34,12 @@ class Database extends React.Component {
     if (err) {
       return <div>Error: {err.message}</div>;
     } else if (!isLoaded) {
-      return <div id="loading">Loading...</div>;
+      return (
+        <div>
+        <p><Link to="/"> Back to the homepage </Link></p>
+        <div id="loading">data is loading... thank you for your patience</div>
+        </div>
+      );
     } else {
       return (
       <div className="render-events">

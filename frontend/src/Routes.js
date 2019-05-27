@@ -8,6 +8,7 @@ var LandingPage = require('./LandingPage.jsx').default;
 var NotFound = require('./NotFound.jsx').default;
 var Login = require('./Login.jsx').default;
 var Database = require('./Database.jsx').default;
+var Signup = require('./Signup.jsx').default;
 
 function Routes(props) {
   return(
@@ -26,6 +27,9 @@ function Routes(props) {
         <Database/>
     )}/>
 
+    <Route exact={true} path='/signup' render={() => (
+        <Signup/>
+    )}/>
     <Route path='*' render={() => (
       <NotFound/>
     )} />

@@ -108,10 +108,21 @@ app.post("/update", function(req, res) {
 // Liv
 // create a new entry in the users table; make sure to check for whether or not username already is taken
 app.get("/signup", function(req, res) {
-  knes.select().table("users").then(function(database) {
-    // do things here
+  knex.select("username").from("users").where({
+    "username": req.body.username
+  }).then(function(username){
+    if (username.length == 0){
+      knex("users").insert({"username": req.body.username,
+                            "password": req.body.password}).then(console.log(req.body.username));
+      res.status(400).send("success!")
+    } else {
+      res.status(400).send("This user already exists.")
+    }
   })
-});
+
+
+  });
+
 
 // Nalu
 // authenticate user, make sure to set the 'superuser' and 'is_leader' parameters appropriately

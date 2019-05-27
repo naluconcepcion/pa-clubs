@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
 import './Style.css';
+import { push } from 'react-router-redux';
 import axios from 'axios';
 
 class Login extends React.Component {
@@ -16,7 +17,6 @@ class Login extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value }); // relied on this dude https://medium.com/@tmkelly28/handling-multiple-form-inputs-in-react-c5eb83755d15
-    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -27,7 +27,10 @@ class Login extends React.Component {
       username: this.state.username,
       password: this.state.password,
     }).then(result => {
-      console.log(result.json());
+      console.log(result);
+      if(result.status == 200) {
+        this.props.history.push('/');
+      }
     });
   }
   render() {
@@ -47,4 +50,6 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
+// thank the dude on stackOverflow for the WRAP ROUTER...
+// here died 3 hours of my time (https://stackoverflow.com/questions/52422332/cannot-read-property-push-of-undefined-in-react)

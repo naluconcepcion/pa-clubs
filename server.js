@@ -116,11 +116,9 @@ app.get("/signup", function(req, res) {
                             "password": req.body.password}).then(console.log(req.body.username));
       res.status(400).send("success!")
     } else {
-      res.status(400).send("This user already exists.")
+      res.status(400).send("This user already exists.");
     }
   })
-
-
   });
 
 

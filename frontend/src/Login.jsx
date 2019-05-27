@@ -5,16 +5,33 @@ import './Style.css';
 class Login extends React.Component {
   constructor() {
     super();
+    this.state = {
+      username: "",
+      password: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleChange(event) {
+    var uname = event.target.username;
+    var pword = event.target.password;
+    console.log(uname + " " + pword);
+    this.setState({
+      username: uname,
+      password: pword
+    });
+  }
+
   handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
     const data = new FormData(event.target);
 
-    fetch('/login', {
+    console.log(event.target);
+
+    fetch('http://pa-clubs.herokuapp.com/login', {
       method: 'POST',
-      body: data
+      body: data,
     });
   }
   render() {
@@ -23,10 +40,10 @@ class Login extends React.Component {
         <h1>LOGIN</h1>
         <p id="links"><Link to="/"> Back to the homepage </Link></p>
         <div className="signup-form">
-          <form className = "input" onSubmit = {this.handleSubmit} method="POST">
-          <p>Username: <input type="text" name="username" id="username"></input></p>
-          <p>Password: <input type="password" name="password" id="password"></input></p>
-          <button onClick={this.handleSubmit}>submit</button>
+          <form className = "input" onSubmit={this.handleSubmit} method="POST" action="http://pa-clubs.herokuapp.com/login">
+          <p>Username: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} id="username"></input></p>
+          <p>Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} id="password"></input></p>
+          <button>submit</button>
           </form>
         </div>
       </div>

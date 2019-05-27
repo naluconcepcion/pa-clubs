@@ -1,4 +1,4 @@
-// Nalu
+// Liv
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
@@ -6,12 +6,14 @@ import './Style.css';
 import { push } from 'react-router-redux';
 import axios from 'axios';
 
-class Login extends React.Component {
+class UpdateEntry extends React.Component {
   constructor() {
     super();
-    this.state = {
-      username: "",
-      password: ""
+    this.state = { // uhh should we actually get features from the database here
+      time: "",
+      location: "",
+      advisor: "",
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,20 +27,20 @@ class Login extends React.Component {
     event.preventDefault();
     const data = new FormData(event.target);
 
-    axios.post('https://pa-clubs.herokuapp.com/login', {
+    axios.post('https://pa-clubs.herokuapp.com/update', {
       username: this.state.username,
       password: this.state.password,
     }).then(result => {
       console.log(result);
       if(result.status == 200) {
-        this.props.history.push('/'); // if successfully logged in, render the form pushing page
+        this.props.history.push('/'); // if successfully created entry, render the form pushing page
       }
     });
   }
   render() {
     return (
       <div>
-        <h1>LOGIN</h1>
+        <h1>Edit Entries Page</h1>
         <p id="links"><Link to="/"> Back to the homepage </Link></p>
         <div className="signup-form">
           <form className = "input" onSubmit={this.handleSubmit} method="POST" action="https://pa-clubs.herokuapp.com/login">
@@ -52,6 +54,6 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login);
+export default withRouter(UpdateEntry);
 // thank the dude on stackOverflow for the WRAP ROUTER...
 // here died 3 hours of my time (https://stackoverflow.com/questions/52422332/cannot-read-property-push-of-undefined-in-react)

@@ -12,7 +12,7 @@ class Database extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("http://pa-clubs.herokuapp.com/database"). // fetch from REMOTE!
+    fetch("https://pa-clubs.herokuapp.com/database"). // fetch from REMOTE!
     then(result => result.json())
       .then((res) => {
         console.log(res);

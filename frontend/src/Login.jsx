@@ -23,11 +23,11 @@ class Login extends React.Component {
     event.preventDefault();
     const data = new FormData(event.target);
 
-    axios.post('http://pa-clubs.herokuapp.com/login', {
+    axios.post('https://pa-clubs.herokuapp.com/login', {
       username: this.state.username,
       password: this.state.password,
     }).then(result => {
-      console.log(result);
+      console.log(result.json());
     });
   }
   render() {
@@ -36,7 +36,7 @@ class Login extends React.Component {
         <h1>LOGIN</h1>
         <p id="links"><Link to="/"> Back to the homepage </Link></p>
         <div className="signup-form">
-          <form className = "input" onSubmit={this.handleSubmit} method="POST" action="http://pa-clubs.herokuapp.com/login">
+          <form className = "input" onSubmit={this.handleSubmit} method="POST" action="https://pa-clubs.herokuapp.com/login">
           <p>Username: <input type="text" name="username" onChange={this.handleChange} id="username"></input></p>
           <p>Password: <input type="password" name="password" onChange={this.handleChange} id="password"></input></p>
           <button>submit</button>

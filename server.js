@@ -8,6 +8,9 @@ const express = require("express");
 const app = express();
 const port = 8888;
 
+// path matching
+const path = require('path')
+
 // setting up knex
 var knex = require("knex")({
   client: "pg",
@@ -29,6 +32,10 @@ const client = new Client();
 async function connect() {
   await client.connect()
 };
+
+// frontend rendering
+app.use(express.static(path.join(__dirname, 'frontend/build')))
+
 // ------------------------------------- KNEX setup -----------------------------------
 // Nalu
 // create the clubs table if it doesn't exist

@@ -5,6 +5,8 @@ NALU:
 
 LIV:
 * cookies
-* sign up
 * update clubs
-* make sure only andover students can sign up
+* check who is signing up
+
+
+compare users from clubs and entries and if they are the same set is_leader to true. If mr capano (or the two of us), then superuser .

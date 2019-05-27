@@ -108,17 +108,26 @@ app.post("/update", function(req, res) {
 // Liv
 // create a new entry in the users table; make sure to check for whether or not username already is taken
 app.get("/signup", function(req, res) {
-  knex.select("username").from("users").where({
-    "username": req.body.username
-  }).then(function(username){
-    if (username.length == 0){
-      knex("users").insert({"username": req.body.username,
-                            "password": req.body.password}).then(console.log(req.body.username));
-      res.status(400).send("success!")
-    } else {
-      res.status(400).send("This user already exists.");
-    }
-  })
+//this SHOULD only work if the person signing up has access to an andover email.
+  var str = req.body.username;
+  var array = str.split("@");
+  console.log(array[1]);
+  if (array[1] == "andover.edu"){
+    knex.select("username").from("users").where({
+      "username": req.body.username
+    }).then(function(username){
+      if (username.length == 0){
+        knex("users").insert({"username": req.body.username,
+                              "password": req.body.password}).then(console.log(req.body.username));
+        res.status(200).send("success!");
+        res.redirect("/validate");
+      } else {
+        res.status(400).send("This user already exists.");
+      }
+    })
+  } else {
+    res.status(400).send("Sorry, this is not a valid PA email address.");
+  }
   });
 
 

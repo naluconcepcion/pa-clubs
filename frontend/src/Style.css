@@ -7,6 +7,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  text-transform: lowercase;
 }
 #links a {
   text-decoration: none;
@@ -16,9 +17,21 @@ body {
 }
 h1 {
   text-align: center;
+  padding: 10px;
 }
 p {
   padding: 10px;
+}
+.signup-form {
+  display: flex;
+  margin: 40px;
+}
+input[type="submit"] {
+  padding: 20px;
+  background-color: rgb(22, 16, 21);
+  text-transform: uppercase;
+  color: white;
+  padding: 15px 30px;
 }
 #landing-text {
   padding: 20px;

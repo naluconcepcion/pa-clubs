@@ -5,13 +5,17 @@ import './Style.css';
 function Login() {
   return (
     <div>
-    <p><Link to="/"> Back to the homepage </Link></p>
       <h1>LOGIN</h1>
-      <p id="landing-text">
-      This should be the landing page for our project's login page.
-      If you are a successfully authenticated user, then you would be permitted to
-      create new club entries using forms.
-      </p>
+      <p id="links"><Link to="/"> Back to the homepage </Link></p>
+      <body>
+      <div className="signup-form">
+        <form className = "input" action="http://localhost:8888/login" method="post">
+        <p>Username: <input type="text" name="username" id="username"></input></p>
+        <p>Password: <input type="password" name="password" id="password"></input></p>
+        <input type="submit" value="submit"></input>
+        </form>
+      </div>
+      </body>
     </div>
   );
 }

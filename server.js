@@ -96,16 +96,16 @@ app.post("/update", function(req, res) {
 
 // Liv
 // create a new entry in the users table; make sure to check for whether or not username already is taken
-app.get("/signup", function(req, res)) {
+app.get("/signup", function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
   knes.select().table("users").then(function(database) {
-    // do things here to authenticate user
-  });
+    // do things here
+  })
 });
 
 // Nalu
 // authenticate user, make sure to set the 'superuser' and 'is_leader' parameters appropriately
-app.get("/login", function(req, res) {
+app.post("/login", function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // allowing for local testing from frontend to backend pulling
   knex.select("password").where({
     "username": req.query['username'],
@@ -113,7 +113,7 @@ app.get("/login", function(req, res) {
   }).from("users").then(function(password) {
     console.log(password.length);
     if (password.length != 0) {
-      res.status(200).send("user authenticated")
+      res.redirect()
     } else {
       res.status(400).send("no user with that username/password combination")
     }

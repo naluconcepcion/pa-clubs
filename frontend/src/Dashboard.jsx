@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
       location: ""
     };
   };
-
+/*
 componentDidMount(){
     fetch("http://pa-clubs.herokuapp.com/club_leaders")
     .then(response => response.json())
@@ -24,7 +24,7 @@ componentDidMount(){
     }))
 }
 
-
+*/
   render() {
     return (
       <div>

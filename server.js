@@ -107,15 +107,8 @@ app.post("/update", function(req, res) {
     }).then({
       res.status(200).send("yeah, this works");
     })
-  /*
-  Ok so I was thinking the way we could do this (and feel free to do it differently but just
-  an idea) was that we could require everyone who wanted to POST to be redirected to /login or /signup.
-  If the user boolean of student_leader and/or superuser are true, then we go ahead and send them to a form page
-  which will take form data and send it back to the database for updating entries. If the booleans aren't true, we
-  send them to a page which renders "sorry, not enough permissions!" or something like that.
-  */
 });
-
+// Liv
 app.get("/update", function(req, res){
   knex.select("club_name").from("clubs").where({
     "student_leader": /* this is where cookies are important */ ;
@@ -149,7 +142,10 @@ app.get("/signup", function(req, res) {
     res.status(400).send("Sorry, this is not a valid PA email address.");
   }
   });
-
+//Liv
+app.get("/club-leaders", function(req, res){
+})
+//Liv
 app.get("/validate", function(req, res){
   res.send("checkpoint")
 });

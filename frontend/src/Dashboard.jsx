@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
     };
   };
 
-ComponentDidMount(){
+componentDidMount(){
     fetch("http://pa-clubs.herokuapp.com/club_leaders")
     .then(response => response.json())
     .then(data => this.setState({

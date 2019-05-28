@@ -1,4 +1,4 @@
-// Liv 
+// Liv
 import React from 'react';
 import Typing from 'react-typing-animation';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
@@ -32,7 +32,10 @@ function Info(){
           </div>
         </div>
         <div id ="information">
-        <p> Some information about why we took on this project here. </p>
+        <p>
+        This is a spring final project for the CSC630 class which doubles as a helpful utility for Phillips Academy students to view
+        all the available clubs on campus, as well as relevant contacts.
+        <br></br><br></br>Disclaimer: the database is outdated but will be updated as the project evolves. </p>
         </div>
       </div>
       <footer>

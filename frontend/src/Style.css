@@ -1,5 +1,4 @@
 /* Nalu and Liv */
-
 body {
   background-color: white;
   color: black;
@@ -7,8 +6,6 @@ body {
 #links {
   padding: 20px;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
   text-transform: lowercase;
 }
 #links a {
@@ -28,6 +25,17 @@ p {
   display: flex;
   margin: 40px;
 }
+.render-events p a {
+  text-decoration: none;
+  padding: 20px;
+  text-transform: lowercase;
+}
+.render-events {
+  padding: 20px;
+}
+#information p {
+  padding: 40px;
+}
 button {
   padding: 20px;
   background-color: rgb(22, 16, 21);
@@ -40,13 +48,14 @@ button {
 }
 .club-entries {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
 }
 .entry {
-  text-align: center;
+  /* text-align: center; */
   border: 2px solid black;
   margin: 10px;
+  padding: 20px;
 }
 #loading {
   text-align: center;

@@ -33,13 +33,16 @@ class Login extends React.Component {
       if(result.status == 200) {
         this.props.history.push('/'); // if successfully logged in, render the form pushing page
       }
+      else {
+        this.props.history.push('/failed'); // if failed, render form failed page
+      }
     });
   }
   render() {
     return (
-      <div>
+      <div id="signup">
+      <p id="links"><Link to="/"> Back to the homepage </Link></p>
         <h1>LOGIN</h1>
-        <p id="links"><Link to="/"> Back to the homepage </Link></p>
         <div className="signup-form">
           <form className = "input" onSubmit={this.handleSubmit} method="POST" action="https://pa-clubs.herokuapp.com/login">
           <p>Username: <input type="text" name="username" onChange={this.handleChange} id="username"></input></p>

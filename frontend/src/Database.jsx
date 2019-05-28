@@ -46,17 +46,18 @@ class Database extends React.Component {
       return (
       <div className="render-events">
       <p><Link to="/"> Back to the homepage </Link></p>
-        <h1> Currently Existing Andover Clubs </h1>
+        <h1> Current Andover Clubs </h1>
+        <p>
+        Here is a list of all current clubs at pa; for the sake of privacy and safety,
+        club meeting times and locations are hidden.
+        </p>
         <div className="club-entries">
         {items.map(
           items =>
           <div className="entry">
             <h2 className = "name"> {items.club_name} </h2>
             <p className = "student-leader"> <b>Club Leader(s)</b>: {items.student_leader} </p>
-            <p className = "meeting-time"> <b>Meeting Time</b>: {items.time} </p>
-            <p className = "location"> <b>Meeting Location</b>: {items.location} </p>
             <p className = "advisor"> <b>Club Advisor</b>: {items.advisor} </p>
-            <p className = "description"> <b>Club Description</b>: {items.description} </p>
           </div>)}
         </div>
       </div>

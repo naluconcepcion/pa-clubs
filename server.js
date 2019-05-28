@@ -111,7 +111,7 @@ app.post("/update", function(req, res) {
 // Liv
 app.get("/update", function(req, res){
   knex.select("club_name").from("clubs").where({
-    "student_leader": "Nalu Concepcion" ;
+    "student_leader": "Nalu Concepcion" 
   }).then(function(data){
     res.json(data);
   })

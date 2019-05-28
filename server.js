@@ -96,6 +96,10 @@ app.post("/", function(req, res) {
 // Liv
 // allow any current student leaders to modify their own entry
 app.post("/update", function(req, res) {
+  knex("users").join("clubs", {"clubs.student_leader" : "users.full_name" }).then(
+
+  )
+
   /*
   Ok so I was thinking the way we could do this (and feel free to do it differently but just
   an idea) was that we could require everyone who wanted to POST to be redirected to /login or /signup.
@@ -108,21 +112,32 @@ app.post("/update", function(req, res) {
 // Liv
 // create a new entry in the users table; make sure to check for whether or not username already is taken
 app.get("/signup", function(req, res) {
-  knex.select("username").from("users").where({
-    "username": req.body.username
-  }).then(function(username){
-    if (username.length == 0){
-      knex("users").insert({"username": req.body.username,
-                            "password": req.body.password}).then(console.log(req.body.username));
-      res.status(400).send("success!")
-    } else {
-      res.status(400).send("This user already exists.")
-    }
-  })
-
-
+//this SHOULD only work if the person signing up has access to an andover email.
+  var str = req.body.username;
+  var array = str.split("@");
+  console.log(array[1]);
+  if (array[1] == "andover.edu"){
+    knex.select("username").from("users").where({
+      "username": req.body.username
+    }).then(function(username){
+      res.redirect("/validate");
+      if (username.length == 0){
+        knex("users").insert({"username": req.body.username,
+                              "password": req.body.password}).then(console.log(req.body.username));
+        res.status(200).send("success!");
+        res.redirect("/validate");
+      } else {
+        res.status(400).send("This user already exists.");
+      }
+    })
+  } else {
+    res.status(400).send("Sorry, this is not a valid PA email address.");
+  }
   });
 
+app.get("/validate", function(req, res){
+  res.send("checkpoint")
+});
 
 // Nalu
 // authenticate user, make sure to set the 'superuser' and 'is_leader' parameters appropriately

@@ -96,10 +96,17 @@ app.post("/", function(req, res) {
 // Liv
 // allow any current student leaders to modify their own entry
 app.post("/update", function(req, res) {
-  knex("users").join("clubs", {"clubs.student_leader" : "users.full_name" }).then(
-
-  )
-
+  knex("clubs").where(
+    {
+      "student_leader": /* get stuff from cookies */,
+      "club_name": req.body.old_club_name
+    }).update({
+      "club_name": req.body.new_club_name,
+      "time": req.body.time,
+      "location": req.body.location
+    }).then({
+      res.status(200).send("yeah, this works");
+    })
   /*
   Ok so I was thinking the way we could do this (and feel free to do it differently but just
   an idea) was that we could require everyone who wanted to POST to be redirected to /login or /signup.
@@ -109,13 +116,20 @@ app.post("/update", function(req, res) {
   */
 });
 
+app.get("/update", function(req, res){
+  knex.select("club_name").from("clubs").where({
+    "student_leader": /* this is where cookies are important */ ;
+  }).then(function(data){
+    res.json(data);
+  })
+});
+
 // Liv
 // create a new entry in the users table; make sure to check for whether or not username already is taken
 app.get("/signup", function(req, res) {
 //this SHOULD only work if the person signing up has access to an andover email.
   var str = req.body.username;
   var array = str.split("@");
-  console.log(array[1]);
   if (array[1] == "andover.edu"){
     knex.select("username").from("users").where({
       "username": req.body.username
@@ -123,7 +137,8 @@ app.get("/signup", function(req, res) {
       res.redirect("/validate");
       if (username.length == 0){
         knex("users").insert({"username": req.body.username,
-                              "password": req.body.password}).then(console.log(req.body.username));
+                              "password": req.body.password,
+                              "full_name": req.body.full_name}).then(console.log(req.body.username));
         res.status(200).send("success!");
         res.redirect("/validate");
       } else {

@@ -10,7 +10,8 @@ var NotFound = require('./NotFound.jsx').default;
 var Login = require('./Login.jsx').default;
 var Database = require('./Database.jsx').default;
 var Signup = require('./Signup.jsx').default;
-
+var Update = require('./Update.jsx').default;
+var Dashboard = require('./Dashboard.jsx').default;
 function Routes(props) {
   return(
     <BrowserRouter>
@@ -30,6 +31,12 @@ function Routes(props) {
 
     <Route exact={true} path='/signup' render={() => (
         <Signup/>
+    )}/>
+    <Route exact={true} path='/update' render={() => (
+        <Update/>
+    )}/>
+    <Route exact={true} path='/dashboard' render={() => (
+        <Dashboard/>
     )}/>
     <Route path='*' render={() => (
       <NotFound/>

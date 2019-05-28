@@ -98,7 +98,7 @@ app.post("/", function(req, res) {
 app.post("/update", function(req, res) {
   knex("clubs").where(
     {
-      "student_leader": /* get stuff from cookies */,
+      "student_leader": "Nalu Concepcion",
       "club_name": req.body.old_club_name
     }).update({
       "club_name": req.body.new_club_name,
@@ -111,7 +111,7 @@ app.post("/update", function(req, res) {
 // Liv
 app.get("/update", function(req, res){
   knex.select("club_name").from("clubs").where({
-    "student_leader": /* this is where cookies are important */ ;
+    "student_leader": "Nalu Concepcion" ;
   }).then(function(data){
     res.json(data);
   })

@@ -104,10 +104,10 @@ app.post("/update", function(req, res) {
       "club_name": req.body.new_club_name,
       "time": req.body.time,
       "location": req.body.location
-    }).then(
-      res.status(200).send("yeah, this works");
-    )
-});
+    }).then(function(data){
+        res.status(200).send("yeah, this works")
+      })
+    });
 // Liv
 app.get("/update", function(req, res){
   knex.select("club_name").from("clubs").where({

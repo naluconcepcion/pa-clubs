@@ -111,7 +111,7 @@ app.post("/update", function(req, res) {
 // Liv
 app.get("/update", function(req, res){
   knex.select("club_name").from("clubs").where({
-    "student_leader": "Nalu Concepcion" 
+    "student_leader": "Nalu Concepcion"
   }).then(function(data){
     res.json(data);
   })
@@ -119,15 +119,15 @@ app.get("/update", function(req, res){
 
 // Liv
 // create a new entry in the users table; make sure to check for whether or not username already is taken
-app.get("/signup", function(req, res) {
+app.post("/signup", function(req, res) {
 //this SHOULD only work if the person signing up has access to an andover email.
+//SIMPLIFY THIS TMRW
   var str = req.body.username;
   var array = str.split("@");
   if (array[1] == "andover.edu"){
     knex.select("username").from("users").where({
       "username": req.body.username
     }).then(function(username){
-      res.redirect("/validate");
       if (username.length == 0){
         knex("users").insert({"username": req.body.username,
                               "password": req.body.password,
@@ -160,6 +160,7 @@ app.post("/login", function(req, res) {
     console.log(password.length);
     if (password.length != 0) {
       res.status(200).send("user successfully logged in");
+      res.redirect("/dashboard");
     } else {
       res.status(400).send("no user with that username/password combination");
     }

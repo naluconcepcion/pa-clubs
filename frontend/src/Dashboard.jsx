@@ -1,3 +1,5 @@
+// Liv
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
 import './Style.css';
@@ -8,31 +10,62 @@ class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      club_name : "",
-      time : "",
-      location: ""
+      isLoaded: false,
+      err: null,
+      items: [] // fetch as an array
     };
-  };
-/*
-componentDidMount(){
-    fetch("http://pa-clubs.herokuapp.com/club_leaders")
-    .then(response => response.json())
-    .then(data => this.setState({
-      club_name : data.club_name,
-      time : data.time,
-      location : data.location
-    }))
-}
+  }
 
-*/
+  componentDidMount() {
+    fetch("http://localhost:8888/users"). // fetch from REMOTE!
+    then(result => result.json())
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          isLoaded: true,
+          items: res
+        });
+      },
+      (error) => {
+        this.setState({
+          isLoaded: false,
+          error
+        });
+        console.log(this.state)
+      })
+  }
+
   render() {
-    return (
-      <div>
-        <h1>DASHBOARD</h1>
-        <p id="links"><Link to="/"> Back to the homepage </Link></p>
-
+    const { err, isLoaded, items } = this.state;
+    if (err) {
+      return <div>Error: {err.message}</div>;
+    } else if (!isLoaded) {
+      return (
+        <div>
+        <p><Link to="/"> Back to the homepage </Link></p>
+        <div id="loading">data is loading... thank you for your patience</div>
+        </div>
+      );
+    } else {
+      return (
+      <div className="render-events">
+      <p><Link to="/"> Back to the homepage </Link></p>
+        <h1> Current Andover Clubs </h1>
+        <p>
+        Here is a list of all current clubs at pa; for the sake of privacy and safety,
+        club meeting times and locations are hidden.
+        </p>
+        <div className="club-entries">
+        {items.map(
+          items =>
+          <div className="entry">
+            <h2 className = "name"> {items.username} </h2>
+            <p className = "student-leader"> <b>Full Name</b>: {items.full_name} </p>
+          </div>)}
+        </div>
       </div>
-    );
+      );
+    }
   }
 }
 

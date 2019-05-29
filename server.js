@@ -160,7 +160,15 @@ app.post("/login", function(req, res) {
 // return a JSON list of all clubs
 app.get("/database", function(req, res) {
   knex.select().table("clubs").then(function(database) {
-    res.json(database)
+    res.json(database);
+  })
+});
+
+// Nalu
+// return a JSON list of all users
+app.get("/users", function(req, res) {
+  knex.select().table("users").then(function(db) {
+    res.json(db);
   })
 });
 

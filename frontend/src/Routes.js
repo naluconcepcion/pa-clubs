@@ -12,7 +12,8 @@ var Database = require('./Database.jsx').default;
 var Signup = require('./Signup.jsx').default;
 var Update = require('./Update.jsx').default;
 var Dashboard = require('./Dashboard.jsx').default;
-
+var Success = require('./Success.jsx').default;
+var Failed = require('./Failed.jsx').default;
 function Routes(props) {
   return(
     <BrowserRouter>
@@ -38,6 +39,12 @@ function Routes(props) {
     )}/>
     <Route exact={true} path='/dashboard' render={() => (
         <Dashboard/>
+    )}/>
+    <Route exact={true} path='/success' render={() => (
+        <Success/>
+    )}/>
+    <Route exact={true} path='/failed' render={() => (
+        <Failed/>
     )}/>
     <Route path='*' render={() => (
       <NotFound/>

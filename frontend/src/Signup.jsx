@@ -30,8 +30,15 @@ class Signup extends React.Component {
     axios.post('http://pa-clubs.herokuapp.com/signup', {
       username: this.state.username,
       password: this.state.password,
+      full_name : this.state.full_name
     }).then(result => {
       console.log(result);
+      if(result.status == 200) {
+        this.props.history.push('/success');
+      }
+      else {
+        this.props.history.push('/failed'); 
+      }
     });
   }
   render() {
@@ -41,7 +48,7 @@ class Signup extends React.Component {
         <p id="links"><Link to="/"> Back to the homepage </Link></p>
         <div className="signup-form">
           <form className = "input" onSubmit={this.handleSubmit} method="POST" action="http://pa-clubs.herokuapp.com/signup">
-          <p>Username: <input type="text" name="username" onChange={this.handleChange} id="username"></input></p>
+          <p>E-Mail: <input type="text" name="username" onChange={this.handleChange} id="username"></input></p>
           <p>Full name: <input type="text" name="full_name" onChange={this.handleChange} id="full_name"></input></p>
           <p>Password: <input type="password" name="password" onChange={this.handleChange} id="password"></input></p>
           <button>sign up</button>

@@ -133,7 +133,6 @@ app.post("/signup", function(req, res) {
                               "password": req.body.password,
                               "full_name": req.body.full_name}).then(console.log(req.body.username));
         res.status(200).send("success!");
-        res.redirect("/validate");
       } else {
         res.status(400).send("This user already exists.");
       }
@@ -142,14 +141,6 @@ app.post("/signup", function(req, res) {
     res.status(400).send("Sorry, this is not a valid PA email address.");
   }
   });
-//Liv
-app.get("/club-leaders", function(req, res){
-})
-//Liv
-app.get("/validate", function(req, res){
-  res.send("checkpoint")
-});
-
 // Nalu
 // authenticate user, make sure to set the 'superuser' and 'is_leader' parameters appropriately
 app.post("/login", function(req, res) {

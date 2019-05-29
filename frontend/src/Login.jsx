@@ -45,7 +45,7 @@ class Login extends React.Component {
         <h1>LOGIN</h1>
         <div className="signup-form">
           <form className = "input" onSubmit={this.handleSubmit} method="POST" action="https://pa-clubs.herokuapp.com/login">
-          <p>Username: <input type="text" name="username" onChange={this.handleChange} id="username"></input></p>
+          <p>Username (E-Mail): <input type="text" name="username" onChange={this.handleChange} id="username"></input></p>
           <p>Password: <input type="password" name="password" onChange={this.handleChange} id="password"></input></p>
           <button>submit</button>
           </form>

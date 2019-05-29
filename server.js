@@ -111,7 +111,7 @@ app.post("/update", function(req, res) {
 // Liv
 app.get("/update", function(req, res){
   knex.select("club_name").from("clubs").where({
-    "student_leader": "Nalu Concepcion"
+    "student_leader": "Nalu Concepcion" //this should (in a later version) require cookies and then redirect
   }).then(function(data){
     res.json(data);
   })
@@ -121,7 +121,6 @@ app.get("/update", function(req, res){
 // create a new entry in the users table; make sure to check for whether or not username already is taken
 app.post("/signup", function(req, res) {
 //this SHOULD only work if the person signing up has access to an andover email.
-//SIMPLIFY THIS TMRW
   var str = req.body.username;
   var array = str.split("@");
   if (array[1] == "andover.edu"){
@@ -165,7 +164,7 @@ app.get("/database", function(req, res) {
 });
 
 // Nalu
-// return a JSON list of all users
+// return a JSON list of all users (problem: unhashed passwords are also being sent )
 app.get("/users", function(req, res) {
   knex.select().table("users").then(function(db) {
     res.json(db);

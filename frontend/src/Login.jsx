@@ -1,4 +1,4 @@
-// Nalu
+// Liv & Nalu
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
@@ -11,7 +11,7 @@ class Login extends React.Component {
     super();
     this.state = {
       username: "",
-      password: ""
+      password: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,20 +24,30 @@ class Login extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
+    try{
+      axios.post('https://pa-clubs.herokuapp.com/login', {
+        username: this.state.username,
+        password: this.state.password,
+      }).then(result => {
+        console.log(result);
+          this.props.history.push('/dashboard'); // if successfully logged in, render the dashboard
+        }, (error) => { //NOT exactly sure which of the catching error things work but this works ?!?
+          this.setState({
+            error: "WRONGGGGGGGG"
+          });
+          this.props.history.push('/failed'); // if failed, render form failed page
+          console.error(error);
+        });
+    } catch(error){
+      this.setState({
+        error: "WRONGGGGGGGG"
+      });
+      this.props.history.push('/failed'); // if failed, render form failed page
+      console.error(error);
+    }
 
-    axios.post('https://pa-clubs.herokuapp.com/login', {
-      username: this.state.username,
-      password: this.state.password,
-    }).then(result => {
-      console.log(result);
-      if(result.status == 200) {
-        this.props.history.push('/dashboard'); // if successfully logged in, render the form pushing page
+
       }
-      else {
-        this.props.history.push('/failed'); // if failed, render form failed page
-      }
-    });
-  }
   render() {
     return (
       <div id="signup">

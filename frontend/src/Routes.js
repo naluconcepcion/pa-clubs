@@ -14,6 +14,7 @@ var Update = require('./Update.jsx').default;
 var Dashboard = require('./Dashboard.jsx').default;
 var Success = require('./Success.jsx').default;
 var Failed = require('./Failed.jsx').default;
+
 function Routes(props) {
   return(
     <BrowserRouter>
@@ -46,6 +47,7 @@ function Routes(props) {
     <Route exact={true} path='/failed' render={() => (
         <Failed/>
     )}/>
+    //generic path to render if none of the other work
     <Route path='*' render={() => (
       <NotFound/>
     )} />

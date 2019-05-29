@@ -1,4 +1,4 @@
-// Liv
+// Nalu
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8888/users"). // fetch from REMOTE!
+    fetch("https://pa-clubs.herokuapp.com/users"). // fetch from REMOTE!
     then(result => result.json())
       .then((res) => {
         console.log(res);
@@ -50,11 +50,13 @@ class Dashboard extends React.Component {
       return (
       <div className="render-events">
       <p><Link to="/"> Back to the homepage </Link></p>
-        <h1> Current Andover Clubs </h1>
+        <h1> a quick note </h1>
         <p>
-        Here is a list of all current clubs at pa; for the sake of privacy and safety,
-        club meeting times and locations are hidden.
+        In the future, this page will display more personalized information, such as your level of credential access
+        or the clubs which you are the leader of. Presently, we have not set these two features because
+        we have not set the backend of our site to determine which users are club leaders.
         </p>
+        <h1> other existing users </h1>
         <div className="club-entries">
         {items.map(
           items =>

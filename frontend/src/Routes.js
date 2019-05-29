@@ -12,6 +12,7 @@ var Database = require('./Database.jsx').default;
 var Signup = require('./Signup.jsx').default;
 var Update = require('./Update.jsx').default;
 var Dashboard = require('./Dashboard.jsx').default;
+
 function Routes(props) {
   return(
     <BrowserRouter>

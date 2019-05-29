@@ -160,7 +160,6 @@ app.post("/login", function(req, res) {
     console.log(password.length);
     if (password.length != 0) {
       res.status(200).send("user successfully logged in");
-      res.redirect("/dashboard");
     } else {
       res.status(400).send("no user with that username/password combination");
     }

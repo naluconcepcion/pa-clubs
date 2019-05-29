@@ -31,7 +31,7 @@ class Login extends React.Component {
     }).then(result => {
       console.log(result);
       if(result.status == 200) {
-        this.props.history.push('/'); // if successfully logged in, render the form pushing page
+        this.props.history.push('/dashboard'); // if successfully logged in, render the form pushing page
       }
       else {
         this.props.history.push('/failed'); // if failed, render form failed page
